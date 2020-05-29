@@ -25,26 +25,27 @@ public class Employee implements Serializable {
                 + "]";
     }
 
-    /**
-     * Writes employee data to a print writer
-     *
-     * @param out the print writer
-     */
-    public void writeData(PrintWriter out) {
-        out.println(name + "|" + salary + "|" + hireDay.getYear() + "|"
-                + hireDay.getMonthValue() + "|" + hireDay.getDayOfMonth());
+    public String getName() {
+        return name;
     }
 
-    /**
-     * Reads employee data from a buffered reader
-     *
-     * @param in the scanner
-     */
-    public void readData(Scanner in) {
-        String line = in.nextLine();
-        String[] tokens = line.split("\\|");
-        name = tokens[0];
-        salary = Double.parseDouble(tokens[1]);
-        hireDay = LocalDate.of(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public LocalDate getHireDay() {
+        return hireDay;
+    }
+
+    public void setHireDay(LocalDate hireDay) {
+        this.hireDay = hireDay;
     }
 }

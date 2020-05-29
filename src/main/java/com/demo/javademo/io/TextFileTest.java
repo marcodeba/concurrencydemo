@@ -3,6 +3,7 @@ package com.demo.javademo.io;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class TextFileTest {
@@ -26,8 +27,9 @@ public class TextFileTest {
             in.close();
 
             // print the newly read employee records
-            for (Employee e : newStaff)
+            for (Employee e : newStaff) {
                 System.out.println(e);
+            }
         } catch (IOException exception) {
             exception.printStackTrace();
         }
@@ -43,8 +45,10 @@ public class TextFileTest {
         // write number of employees
         out.println(employees.length);
 
-        for (Employee e : employees)
-            e.writeData(out);
+        for (Employee e : employees) {
+            out.println(e.getName() + "|" + e.getSalary() + "|" + e.getHireDay().getYear() + "|"
+                    + e.getHireDay().getMonthValue() + "|" + e.getHireDay().getDayOfMonth());
+        }
     }
 
     /**
@@ -61,7 +65,16 @@ public class TextFileTest {
         Employee[] employees = new Employee[n];
         for (int i = 0; i < n; i++) {
             employees[i] = new Employee();
-            employees[i].readData(in);
+
+            String line = in.nextLine();
+            String[] tokens = line.split("\\|");
+            String name = tokens[0];
+            double salary = Double.parseDouble(tokens[1]);
+            LocalDate hireDay = LocalDate.of(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
+
+            employees[i].setName(name);
+            employees[i].setSalary(salary);
+            employees[i].setHireDay(hireDay);
         }
         return employees;
     }
