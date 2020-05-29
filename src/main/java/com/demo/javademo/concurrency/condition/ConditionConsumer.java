@@ -6,22 +6,18 @@ import java.util.concurrent.locks.Lock;
 
 public class ConditionConsumer implements Runnable {
     private Queue<String> msg;
-    private int maxSize;
     private Lock lock;
     private Condition condition;
 
-    public ConditionConsumer(Queue<String> msg, int maxSize, Lock lock, Condition condition) {
+    public ConditionConsumer(Queue<String> msg, Lock lock, Condition condition) {
         this.msg = msg;
-        this.maxSize = maxSize;
         this.lock = lock;
         this.condition = condition;
     }
 
     @Override
     public void run() {
-        int i = 0;
         while (true) {
-            i++;
             lock.lock();
             try {
                 if (msg.isEmpty()) {

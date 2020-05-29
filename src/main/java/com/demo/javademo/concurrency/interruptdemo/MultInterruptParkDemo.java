@@ -40,7 +40,8 @@ public class MultInterruptParkDemo {
     public static class ThreadDemo04 extends Thread {
         @Override
         public void run() {
-            while (flag) { }
+            while (flag) {
+            }
             // LockSupport.park()会检查线程是否设置了中断标志位，如果设置了，则返回（这里并不会清除中断标志位）
             // 注意：如果没有设置中断标记位，则看_count，不是没有设中断标记位就直接中断的!!!!!!!!!
             LockSupport.park();

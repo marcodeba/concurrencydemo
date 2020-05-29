@@ -14,7 +14,7 @@ public class ConditionTest {
         Condition condition = lock.newCondition();
 
         ConditionProducer producer = new ConditionProducer(queue, maxSize, lock, condition);
-        ConditionConsumer consumer = new ConditionConsumer(queue, maxSize, lock, condition);
+        ConditionConsumer consumer = new ConditionConsumer(queue, lock, condition);
         Thread t1 = new Thread(producer);
         Thread t2 = new Thread(consumer);
         t1.start();

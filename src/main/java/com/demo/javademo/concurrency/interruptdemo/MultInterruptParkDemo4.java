@@ -16,7 +16,8 @@ public class MultInterruptParkDemo4 {
     public static class ThreadDemo04 extends Thread {
         @Override
         public void run() {
-            while (flag) { }
+            while (flag) {
+            }
             try {
                 // sleep如果检测到中断会直接清除中断标志，并抛出异常。
                 Thread.sleep(3000);

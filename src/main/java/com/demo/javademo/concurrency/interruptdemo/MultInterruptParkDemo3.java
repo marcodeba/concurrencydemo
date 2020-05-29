@@ -3,25 +3,24 @@ package com.demo.javademo.concurrency.interruptdemo;
 import java.util.concurrent.locks.LockSupport;
 
 /**
- *
  * public static boolean interrupted() {
- *     return currentThread().isInterrupted(true);
+ * return currentThread().isInterrupted(true);
  * }
- *
+ * <p>
  * bool os::is_interrupted(Thread* thread, bool clear_interrupted) {
- *   assert(Thread::current() == thread || Threads_lock->owned_by_self(),
- *     "possibility of dangling Thread pointer");
- *
- *   OSThread* osthread = thread->osthread();
- *
- *   bool interrupted = osthread->interrupted();
- *
- *   if (interrupted && clear_interrupted) {
- *     osthread->set_interrupted(false);
- *     // consider thread->_SleepEvent->reset() ... optional optimization
- *   }
- *
- *   return interrupted;
+ * assert(Thread::current() == thread || Threads_lock->owned_by_self(),
+ * "possibility of dangling Thread pointer");
+ * <p>
+ * OSThread* osthread = thread->osthread();
+ * <p>
+ * bool interrupted = osthread->interrupted();
+ * <p>
+ * if (interrupted && clear_interrupted) {
+ * osthread->set_interrupted(false);
+ * // consider thread->_SleepEvent->reset() ... optional optimization
+ * }
+ * <p>
+ * return interrupted;
  * }
  */
 public class MultInterruptParkDemo3 {
@@ -38,7 +37,8 @@ public class MultInterruptParkDemo3 {
     public static class ThreadDemo04 extends Thread {
         @Override
         public void run() {
-            while (flag) { }
+            while (flag) {
+            }
             // 设置了中断标记位，所以park直接返回
             LockSupport.park();
             System.out.println("本打印出现在第一个park()之后");

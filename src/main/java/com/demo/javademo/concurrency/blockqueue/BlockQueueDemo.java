@@ -17,11 +17,30 @@ public class BlockQueueDemo<E> {
         this.size = size;
     }
 
+    public static void main(String[] args) {
+        BlockQueueDemo<Integer> queue = new BlockQueueDemo<>(20);
+        new Thread(() -> {
+            for (int index = 0; index < 100; index++) {
+                queue.enQueue(index);
+            }
+        }).start();
+
+        new Thread(() -> {
+            for (int index = 0; index < 100; index++) {
+                queue.deQueue();
+            }
+        }).start();
+    }
+
     /**
      * 入队操作，队列满了,入队要阻塞(condition的await)
+     *
      * @param e
      */
     public void enQueue(E e) {
+        //非空判断
+        if (e == null) throw new NullPointerException();
+
         // 支持多线程，得要加锁
         lock.lock();
         try {
@@ -44,6 +63,7 @@ public class BlockQueueDemo<E> {
 
     /**
      * 出列操作，如果队列空了，出队要阻塞(condition的await)
+     *
      * @return
      */
     public E deQueue() {
@@ -67,28 +87,5 @@ public class BlockQueueDemo<E> {
                 lock.unlock();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        BlockQueueDemo<Integer> queue = new BlockQueueDemo<>(20);
-        new Thread(() -> {
-            for (int index = 0; index < 100; index++) {
-                try {
-                    queue.enQueue(index);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-        new Thread(() -> {
-            for (int index = 0; index < 100; index++) {
-                try {
-                    queue.deQueue();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
     }
 }
