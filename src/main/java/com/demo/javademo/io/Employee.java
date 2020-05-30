@@ -1,9 +1,7 @@
 package com.demo.javademo.io;
 
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Employee implements Serializable {
     private String name;

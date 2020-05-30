@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class TextFileTest {
     public static void main(String[] args) {
         Employee[] staff = new Employee[4];
-
         staff[0] = new Employee("employee1", 10000, 1987, 1, 1);
         staff[1] = new Employee("employee2", 20000, 1989, 2, 2);
         staff[2] = new Employee("employee3", 30000, 1990, 3, 3);
@@ -44,7 +43,6 @@ public class TextFileTest {
     private static void writeData(Employee[] employees, PrintWriter out) {
         // write number of employees
         out.println(employees.length);
-
         for (Employee e : employees) {
             out.println(e.getName() + "|" + e.getSalary() + "|" + e.getHireDay().getYear() + "|"
                     + e.getHireDay().getMonthValue() + "|" + e.getHireDay().getDayOfMonth());
@@ -65,16 +63,11 @@ public class TextFileTest {
         Employee[] employees = new Employee[n];
         for (int i = 0; i < n; i++) {
             employees[i] = new Employee();
-
             String line = in.nextLine();
             String[] tokens = line.split("\\|");
-            String name = tokens[0];
-            double salary = Double.parseDouble(tokens[1]);
-            LocalDate hireDay = LocalDate.of(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
-
-            employees[i].setName(name);
-            employees[i].setSalary(salary);
-            employees[i].setHireDay(hireDay);
+            employees[i].setName(tokens[0]);
+            employees[i].setSalary(Double.parseDouble(tokens[1]));
+            employees[i].setHireDay(LocalDate.of(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
         }
         return employees;
     }
