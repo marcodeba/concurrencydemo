@@ -32,7 +32,7 @@ class Parent implements Runnable {
             } else {
                 System.out.println(name + "怎么没有茅坑了...");
             }
-            //申请茅坑 如果资源达到3次，就等待
+            //申请茅坑，如果资源达到3次，就等待
             wc.acquire();
             System.out.println(name + "终于轮我上厕所了..爽啊");
             Thread.sleep(new Random().nextInt(1000)); // 模拟上厕所时间。
