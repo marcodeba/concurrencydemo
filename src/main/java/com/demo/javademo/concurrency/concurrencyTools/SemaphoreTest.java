@@ -1,4 +1,4 @@
-package com.demo.javademo.concurrency;
+package com.demo.javademo.concurrency.concurrencyTools;
 
 import java.util.Random;
 import java.util.concurrent.Semaphore;
