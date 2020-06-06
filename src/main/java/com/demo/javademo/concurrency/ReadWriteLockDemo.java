@@ -3,11 +3,12 @@ package com.demo.javademo.concurrency;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ReadWriteLockDemo {
     static Map<String, Object> cacheMap = new HashMap<>();
-    static ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    static ReadWriteLock lock = new ReentrantReadWriteLock();
     static Lock readLock = lock.readLock();
     static Lock writeLock = lock.writeLock();
 

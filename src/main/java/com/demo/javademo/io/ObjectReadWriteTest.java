@@ -15,11 +15,11 @@ public class ObjectReadWriteTest {
         staff[3] = new Employee("employee4", 40000, 1990, 4, 4);
 
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("obj.txt"));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("obj.dat"));
             oos.writeObject(staff);
             oos.close();
 
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("obj.txt"));
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("obj.dat"));
             Employee[] employees = (Employee[]) ois.readObject();
             for (Employee employee : employees) {
                 System.out.println(employee);

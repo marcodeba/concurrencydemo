@@ -18,18 +18,18 @@ public class BlockQueueDemo<E> {
     }
 
     public static void main(String[] args) {
-        BlockQueueDemo<Integer> queue = new BlockQueueDemo<>(20);
+        BlockQueueDemo<Integer> blockQueue = new BlockQueueDemo<>(20);
         new Thread(() -> {
             for (int index = 0; index < 100; index++) {
-                queue.enQueue(index);
+                blockQueue.enQueue(index);
             }
-        }).start();
+        }, "enQueue").start();
 
         new Thread(() -> {
             for (int index = 0; index < 100; index++) {
-                queue.deQueue();
+                blockQueue.deQueue();
             }
-        }).start();
+        }, "deQueue").start();
     }
 
     /**
@@ -45,7 +45,7 @@ public class BlockQueueDemo<E> {
         lock.lock();
         try {
             // 队列满了，入队阻塞
-            if (linkedList.size() == size) {
+            while (linkedList.size() == size) {
                 fullCondition.await();
             }
             // 否则将元素入队
@@ -67,25 +67,24 @@ public class BlockQueueDemo<E> {
      * @return
      */
     public E deQueue() {
+        E element = null;
         lock.lock();
-        while (true) {
-            try {
-                // 队列空，出队阻塞
-                if (linkedList.isEmpty()) {
-                    emptyCondition.await();
-                }
-                // 否则将元素出队
-                E e = linkedList.removeFirst();
-                System.out.println(e + "元素出列了");
-
-                // 通知可以取元素了
-                fullCondition.signal();
-                return e;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } finally {
-                lock.unlock();
+        try {
+            // 队列空，出队阻塞
+            while (linkedList.isEmpty()) {
+                emptyCondition.await();
             }
+            // 否则将元素出队
+            element = linkedList.removeFirst();
+            System.out.println(element + "元素出列了");
+
+            // 通知可以取元素了
+            fullCondition.signal();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
         }
+        return element;
     }
 }

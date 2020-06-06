@@ -26,8 +26,8 @@ public class TextFileTest {
             in.close();
 
             // print the newly read employee records
-            for (Employee e : newStaff) {
-                System.out.println(e);
+            for (Employee employee : newStaff) {
+                System.out.println(employee);
             }
         } catch (IOException exception) {
             exception.printStackTrace();
