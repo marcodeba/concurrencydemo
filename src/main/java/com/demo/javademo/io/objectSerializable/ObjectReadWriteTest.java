@@ -1,4 +1,4 @@
-package com.demo.javademo.io;
+package com.demo.javademo.io.objectSerializable;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

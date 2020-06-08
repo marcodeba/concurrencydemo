@@ -2,6 +2,7 @@ package com.demo.javademo.concurrency.singleton;
 
 import com.demo.javademo.annoations.NotRecommend;
 import com.demo.javademo.annoations.ThreadSafe;
+
 /**
  * 懒汉模式
  * 单例实例在第一次使用时进行创建

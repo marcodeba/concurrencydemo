@@ -7,17 +7,17 @@ public class SemaphoreTest {
     public static void main(String[] args) {
         Semaphore semaphore = new Semaphore(3);
         for (int i = 1; i <= 10; i++) {
-            Parent parent = new Parent("第" + i + "个人,", semaphore);
-            new Thread(parent).start();
+            Toilet toilet = new Toilet("第" + i + "个人,", semaphore);
+            new Thread(toilet).start();
         }
     }
 }
 
-class Parent implements Runnable {
+class Toilet implements Runnable {
     private String name;
     private Semaphore wc;
 
-    public Parent(String name, Semaphore wc) {
+    public Toilet(String name, Semaphore wc) {
         this.name = name;
         this.wc = wc;
     }
@@ -25,7 +25,7 @@ class Parent implements Runnable {
     @Override
     public void run() {
         try {
-            // 剩下的资源(剩下的茅坑)
+            // 剩下的资源：即剩下的茅坑
             int availablePermits = wc.availablePermits();
             if (availablePermits > 0) {
                 System.out.println(name + "天助我也,终于有茅坑了...");

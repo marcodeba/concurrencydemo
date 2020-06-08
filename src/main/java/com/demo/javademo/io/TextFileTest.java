@@ -1,5 +1,7 @@
 package com.demo.javademo.io;
 
+import com.demo.javademo.io.objectSerializable.Employee;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
