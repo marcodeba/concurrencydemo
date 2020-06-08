@@ -12,7 +12,7 @@ public class Excel2EntityConfig {
         return formater;
     }
 
-    /***************************************************************************
+    /**
      * 设置日期型字段的转换格式 默认值为 new SimpleDateFormat("yyyy-MM-dd HH：mm：ss ");
      */
     public void setFormater(SimpleDateFormat formater) {
@@ -23,7 +23,7 @@ public class Excel2EntityConfig {
         return columns;
     }
 
-    /***************************************************************************
+    /**
      * 设置Excel列与实体字段的对应关系
      *
      * @param columns
@@ -39,7 +39,7 @@ public class Excel2EntityConfig {
         return currPosittion;
     }
 
-    /***************************************************************************
+    /**
      * 设置excel表格数据从第几行开始，默认值,跳过标题行，从第二行开始
      * 该值大于0
      */
@@ -51,7 +51,7 @@ public class Excel2EntityConfig {
         return colStartPosittion;
     }
 
-    /***************************************************************************
+    /**
      * 设置excel表格数据从第几列开始，默认值,从第1列开始
      * 该值大于0
      */
