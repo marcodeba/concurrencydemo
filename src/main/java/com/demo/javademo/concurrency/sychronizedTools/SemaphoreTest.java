@@ -9,9 +9,9 @@ public class SemaphoreTest {
     static ExecutorService executorService = Executors.newCachedThreadPool();
 
     public static void main(String[] args) {
-        Semaphore semaphore = new Semaphore(3);
+        Semaphore toilet = new Semaphore(3);
         for (int i = 1; i <= 10; i++) {
-            Person person = new Person("第" + i + "个人,", semaphore);
+            Person person = new Person("第" + i + "个人,", toilet);
             //new Thread(person).start();
             executorService.execute(person);
         }
@@ -21,32 +21,31 @@ public class SemaphoreTest {
 
 class Person implements Runnable {
     private String name;
-    private Semaphore wc;
+    private Semaphore toilet;
 
-    public Person(String name, Semaphore wc) {
+    public Person(String name, Semaphore toilet) {
         this.name = name;
-        this.wc = wc;
+        this.toilet = toilet;
     }
 
     @Override
     public void run() {
         try {
             // 剩下的资源：即剩下的茅坑
-            int availablePermits = wc.availablePermits();
-            if (availablePermits > 0) {
+            if (toilet.availablePermits() > 0) {
                 System.out.println(name + "天助我也,终于有茅坑了...");
             } else {
                 System.out.println(name + "怎么没有茅坑了...");
             }
-            //申请茅坑，如果资源达到3次，就等待
-            wc.acquire();
+            //申请茅坑，如果资源达到3次就等待
+            toilet.acquire();
             System.out.println(name + "终于轮我上厕所了..爽啊");
             Thread.sleep(new Random().nextInt(1000)); // 模拟上厕所时间。
             System.out.println(name + "厕所上完了...");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            wc.release();
+            toilet.release();
         }
     }
 }

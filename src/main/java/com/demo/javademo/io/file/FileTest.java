@@ -36,17 +36,18 @@ public class FileTest {
 
     public void test08() throws IOException {
         FileReader fileReader = new FileReader(new File("").getAbsolutePath() + "/io/test.txt");
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String str;
-        while ((str = bufferedReader.readLine()) != null) {
-            System.out.println(str);
+        BufferedReader br = new BufferedReader(fileReader);
+        String line;
+        while ((line = br.readLine()) != null) {
+            System.out.println(line);
         }
+        br.close();
         fileReader.close();
-        bufferedReader.close();
     }
 
     public void test09() throws IOException {
         FileReader fileReader = new FileReader(new File("").getAbsolutePath() + "/io/test.txt");
+
         int c;
         while ((c = fileReader.read()) != -1) {
             System.out.print((char) c);

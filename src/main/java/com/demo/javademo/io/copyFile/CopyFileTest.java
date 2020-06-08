@@ -5,13 +5,12 @@ import java.io.*;
 public class CopyFileTest {
     public static void main(String[] args) throws IOException {
         CopyFileTest test = new CopyFileTest();
-
     }
 
     public void test12() throws IOException {
         // 输入和输出都使用缓冲流
-        FileInputStream in = new FileInputStream("E:\\视频资料\\大数据原理与应用\\1.1大数据时代.mp4");
-        BufferedInputStream inBuffer = new BufferedInputStream(in);
+        //FileInputStream in = new FileInputStream("E:\\视频资料\\大数据原理与应用\\1.1大数据时代.mp4");
+        BufferedInputStream inBuffer = new BufferedInputStream(new FileInputStream("E:\\视频资料\\大数据原理与应用\\1.1大数据时代.mp4"));
         FileOutputStream out = new FileOutputStream("1.1大数据时代.mp4");
         BufferedOutputStream outBuffer = new BufferedOutputStream(out);
         int len = 0;
@@ -22,15 +21,15 @@ public class CopyFileTest {
         }
         System.out.println("复制文件所需的时间：" + (System.currentTimeMillis() - begin)); // 平均时间约 200 多毫秒
         inBuffer.close();
-        in.close();
+        //in.close();
         outBuffer.close();
         out.close();
     }
 
     public void test13() throws IOException {
         // 只有输入使用缓冲流
-        FileInputStream in = new FileInputStream("E:\\视频资料\\大数据原理与应用\\1.1大数据时代.mp4");
-        BufferedInputStream inBuffer = new BufferedInputStream(in);
+        //FileInputStream in = new FileInputStream("E:\\视频资料\\大数据原理与应用\\1.1大数据时代.mp4");
+        BufferedInputStream inBuffer = new BufferedInputStream(new FileInputStream("E:\\视频资料\\大数据原理与应用\\1.1大数据时代.mp4"));
         FileOutputStream out = new FileOutputStream("1.1大数据时代.mp4");
         int len = 0;
         byte[] bs = new byte[1024];
@@ -40,7 +39,7 @@ public class CopyFileTest {
         }
         System.out.println("复制文件所需时间：" + (System.currentTimeMillis() - begin)); // 平均时间约 500 多毫秒
         inBuffer.close();
-        in.close();
+        //in.close();
         out.close();
     }
 
