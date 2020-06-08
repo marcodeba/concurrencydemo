@@ -1,23 +1,29 @@
-package com.demo.javademo.concurrency.concurrencyTools;
+package com.demo.javademo.concurrency.sychronizedTools;
 
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 public class SemaphoreTest {
+    static ExecutorService executorService = Executors.newCachedThreadPool();
+
     public static void main(String[] args) {
         Semaphore semaphore = new Semaphore(3);
         for (int i = 1; i <= 10; i++) {
-            Toilet toilet = new Toilet("第" + i + "个人,", semaphore);
-            new Thread(toilet).start();
+            Person person = new Person("第" + i + "个人,", semaphore);
+            //new Thread(person).start();
+            executorService.execute(person);
         }
+        executorService.shutdown();
     }
 }
 
-class Toilet implements Runnable {
+class Person implements Runnable {
     private String name;
     private Semaphore wc;
 
-    public Toilet(String name, Semaphore wc) {
+    public Person(String name, Semaphore wc) {
         this.name = name;
         this.wc = wc;
     }

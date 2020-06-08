@@ -1,4 +1,4 @@
-package com.demo.javademo.concurrency.concurrencyTools;
+package com.demo.javademo.concurrency.sychronizedTools;
 
 import java.util.concurrent.CyclicBarrier;
 
