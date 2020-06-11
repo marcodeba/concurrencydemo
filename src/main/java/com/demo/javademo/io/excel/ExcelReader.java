@@ -18,45 +18,29 @@ import java.util.Date;
  * @param <E> 读取后转换的目标对像类型
  */
 public class ExcelReader<E> {
-    /***************************************************************************
-     * 设置Cell之间用空格分开
-     */
+    // 设置Cell之间用空格分开
     private static String EXCEL_LINE_DELIMITER = " ";
-    /***************************************************************************
-     * 实体对像
-     */
+    // 实体对像
     private E entity;
+
     private Excel2EntityConfig excel2EntityConfig;
-    /***************************************************************************
-     * 创建文件输入流
-     */
+    // 创建文件输入流
     private BufferedReader reader = null;
-    /***************************************************************************
-     * 当前工作表 sheet
-     */
+    // 当前工作表 sheet
     private int currSheet;
-    /***************************************************************************
-     * 当前位置
-     */
+    // 当前位置
     private int currPosittion;
-    /***************************************************************************
-     * 工作表sheet的数量 *
-     */
+    // 工作表sheet的数量
     private int numOfSheets;
-    /***************************************************************************
-     * HSSFWordbook
-     */
+    // HSSFWordbook
     private Workbook workbook = null;
-    /***************************************************************************
-     * 设置最大列数
-     */
+    // 设置最大列数
     private int MAX_EXCEL_COLUMNS = 64;
 
-    /***************************************************************************
+    /**
      * 由文件输入流创建初始化一个ExcelReader
      *
-     * @param inputfile
-     *            文件输入流
+     * @param inputfile 文件输入流
      * @throws IOException
      * @throws Exception
      */
@@ -65,33 +49,23 @@ public class ExcelReader<E> {
         if (StringUtils.isBlank(inputfile)) {
             throw new IOException("找不到文件");
         }
-        /***********************************************************************
-         * 设置开始行
-         */
+        // 设置开始行
         this.currPosittion = this.excel2EntityConfig.getCurrPosittion();
-        /***********************************************************************
-         * 设置当前位置为0
-         */
+        // 设置当前位置为0
         this.currSheet = 0;
 
-        /*******************************************************************
-         * 如果是Excel文件则创建BufferedReader读取
-         */
-
+        // 如果是Excel文件则创建BufferedReader读取
         try {
             this.workbook = WorkbookFactory.create(new File(inputfile));
         } catch (Exception e) {
             throw new RuntimeException("读取EXCEL文件出错", e);
         }
 
-        /*******************************************************************
-         * 设置工作表Sheet数
-         */
+        // 设置工作表Sheet数
         this.numOfSheets = this.workbook.getNumberOfSheets();
-
     }
 
-    /***************************************************************************
+    /**
      * 读到文件的一行
      *
      * @return
@@ -260,9 +234,7 @@ public class ExcelReader<E> {
         }
     }
 
-    /**
-     * 关闭函数执行流的操作
-     */
+    // 关闭函数执行流的操作
     public void close() {
         // 如果is不为空，则关闭InputStream文件输入流
 //		if (inStream != null) {

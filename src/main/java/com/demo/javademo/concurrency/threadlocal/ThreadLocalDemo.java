@@ -1,4 +1,4 @@
-package com.demo.javademo.javaExample.threadlocal;
+package com.demo.javademo.concurrency.threadlocal;
 
 import java.lang.reflect.Field;
 

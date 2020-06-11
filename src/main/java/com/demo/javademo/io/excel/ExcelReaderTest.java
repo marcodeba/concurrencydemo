@@ -27,7 +27,7 @@ public class ExcelReaderTest {
         config.setCurrPosittion(2);
         //设置从第1列开始读取
 //			config.setColStartPosittion(1);
-        ExcelReader<MyEntity> excel = new ExcelReader<MyEntity>();
+        ExcelReader<MyEntity> excel = new ExcelReader<>();
         excel.setExcel2EntityConfig(config);
 
         //如果现现EXCEl编码问题引起的读取问题，请将InputStream换成 ByteArrayInputStream 可解决问题
