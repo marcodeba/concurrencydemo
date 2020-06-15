@@ -23,13 +23,10 @@ public final class Directory {
         return local(new File(path), regex);
     }
 
+    // 给定目录下整个目录树中所有文件的构成的List
     public static TreeInfo walk(String start, String regex) {
         // Begin recursion
         return recurseDirs(new File(start), regex);
-    }
-
-    public static TreeInfo walk(File start, String regex) {
-        return recurseDirs(start, regex);
     }
 
     static TreeInfo recurseDirs(File startDir, String regex) {
@@ -38,7 +35,8 @@ public final class Directory {
             if (item.isDirectory()) {
                 result.dirs.add(item);
                 result.addAll(recurseDirs(item, regex));
-            } else {// Regular file
+            } else {
+                // Regular file
                 if (item.getName().matches(regex))
                     result.files.add(item);
             }
@@ -47,30 +45,24 @@ public final class Directory {
     }
 
     public static void main(String[] args) {
-        String path = "/Users/marcopan/mysourcecode/javademo/src/main/java/com/demo/javademo/io/file";
-        if (args.length == 0) {
-            TreeInfo walk = walk(path, ".*");
-            List<File> dirs = walk.dirs;
-            for (File dir : dirs) {
-                System.out.println(dir.getName());
-            }
-
-            List<File> files = walk.files;
-            for (File file : files) {
-                System.out.println(file.getName());
-            }
-        } else {
-            for (String arg : args) {
-                System.out.println(walk(arg, ".*"));
-            }
+//        // All directories:
+//        TreeInfo walk = Directory.walk(".", ".*");
+//        List<File> dirs = walk.dirs;
+//        for (File dir : dirs) {
+//            System.out.println(dir.getName());
+//        }
+        // All files beginning with 'T'
+        for (File file : Directory.local(".", ".*")) {
+            System.out.println(file);
         }
-
-        System.out.println("-------------------------------------------------");
-
-        File[] files = local(path, ".*");
-        for (File file : files) {
-            System.out.println(file.getName());
-        }
+        System.out.println("----------------------");
+        // All Java files beginning with 'T':
+        for (File file : Directory.walk(".", "T.*\\.java"))
+            System.out.println(file);
+        System.out.println("======================");
+        // Class files containing "M" or "m":
+        for (File file : Directory.walk(".", ".*[Mm].*\\.class"))
+            System.out.println(file);
     }
 
     // A two-tuple for returning a pair of objects:
