@@ -26,10 +26,9 @@ public class Excel2EntityConfig {
     /**
      * 设置Excel列与实体字段的对应关系
      *
-     * @param columns
-     *            实体字段的 字符串数组表示 例如： String[] columns = {"字段一", "字段二",
-     *            "字段三","字段n..." };
-     *            Excel表格第一列对应实体对像字段一，Excel表格第二列对应实体对像字段二....依次类推
+     * @param columns 实体字段的 字符串数组表示 例如： String[] columns = {"字段一", "字段二",
+     *                "字段三","字段n..." };
+     *                Excel表格第一列对应实体对像字段一，Excel表格第二列对应实体对像字段二....依次类推
      */
     public void setColumns(String[] columns) {
         this.columns = columns;
