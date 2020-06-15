@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public final class Directory {
+    // 本地目录中文件构成构成的File数组
     public static File[] local(File dir, final String regex) {
         return dir.listFiles(new FilenameFilter() {
             private Pattern pattern = Pattern.compile(regex);
@@ -46,8 +47,9 @@ public final class Directory {
     }
 
     public static void main(String[] args) {
+        String path = "/Users/marcopan/mysourcecode/javademo/src/main/java/com/demo/javademo/io/file";
         if (args.length == 0) {
-            TreeInfo walk = walk("/Users/marcopan/mysourcecode/javademo/src/main/java/com/demo/javademo/io/file", ".*");
+            TreeInfo walk = walk(path, ".*");
             List<File> dirs = walk.dirs;
             for (File dir : dirs) {
                 System.out.println(dir.getName());
@@ -61,6 +63,13 @@ public final class Directory {
             for (String arg : args) {
                 System.out.println(walk(arg, ".*"));
             }
+        }
+
+        System.out.println("-------------------------------------------------");
+
+        File[] files = local(path, ".*");
+        for (File file : files) {
+            System.out.println(file.getName());
         }
     }
 
