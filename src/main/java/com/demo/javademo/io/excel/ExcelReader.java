@@ -131,7 +131,7 @@ public class ExcelReader<E> {
         Row rowline = sheet.getRow(row);
         if (rowline != null) {
             // 创建字符串缓冲区
-//            StringBuffer buffer = new StringBuffer();
+//            StringBuffer bytebuffer = new StringBuffer();
             // 获到当前行的列数
             int filledColumns = rowline.getLastCellNum();
             Cell cell;
@@ -225,11 +225,11 @@ public class ExcelReader<E> {
 
                 }
                 // 在每个字段之间插入分割符
-                // buffer.append(cellvalue).append(EXCEL_LINE_DELIMITER);
+                // bytebuffer.append(cellvalue).append(EXCEL_LINE_DELIMITER);
             }
             // 以字符串返回该行的数据
             return entity;
-            // return buffer.toString();
+            // return bytebuffer.toString();
         } else {
             return null;
         }

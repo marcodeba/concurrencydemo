@@ -13,7 +13,12 @@ public class ProcessFiles {
     }
 
     public static void main(String[] args) {
-        new ProcessFiles(file -> System.out.println(file), "java").start();
+        new ProcessFiles(new Strategy() {
+            @Override
+            public void process(File file) {
+                System.out.println(file);
+            }
+        }, "java").start();
     }
 
     public void start() {
