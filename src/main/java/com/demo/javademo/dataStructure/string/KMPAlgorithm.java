@@ -3,6 +3,8 @@ package com.demo.javademo.dataStructure.string;
 public class KMPAlgorithm {
     public static void main(String[] args) {
         System.out.println(kmpMatch("abaabaabbabaaabaabbabaab", "abaab"));
+//        int[] arr = getNext("abcabx".toCharArray());
+//        System.out.println(Arrays.toString(arr));
     }
 
     // 字符组成的这个子串最长的相同前缀后缀的长度数组
