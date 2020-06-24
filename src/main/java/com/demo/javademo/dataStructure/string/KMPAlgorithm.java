@@ -2,9 +2,9 @@ package com.demo.javademo.dataStructure.string;
 
 public class KMPAlgorithm {
     public static void main(String[] args) {
-        System.out.println(kmpMatch("abaabaabbabaaabaabbabaab", "abaab"));
-//        int[] arr = getNext("abcabx".toCharArray());
-//        System.out.println(Arrays.toString(arr));
+        System.out.println(kmpMatch("abaabaabbabaaabaabbabaab", "abaabbabaab"));
+//        int[] arr = getNext("abaabbabaab".toCharArray());
+//        System.out.println(java.util.Arrays.toString(arr));
     }
 
     // 字符组成的这个子串最长的相同前缀后缀的长度数组
@@ -38,8 +38,9 @@ public class KMPAlgorithm {
             if (j == -1 || s_arr[i] == t_arr[j]) {
                 i++;
                 j++;
-            } else
+            } else {
                 j = next[j];
+            }
         }
         return (j == t_arr.length) ? (i - j) : -1;
     }
