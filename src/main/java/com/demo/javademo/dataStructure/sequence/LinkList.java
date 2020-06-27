@@ -1,6 +1,19 @@
 package com.demo.javademo.dataStructure.sequence;
 
 public class LinkList<T> {
+    private Node header;
+    private Node tail;
+    private int size;
+    public LinkList() {
+        header = null;
+        tail = null;
+    }
+    public LinkList(T element) {
+        header = new Node(element, null);
+        tail = header;
+        size++;
+    }
+
     public static void main(String[] args) {
         LinkList<String> linkList = new LinkList<String>();
         linkList.insert("aaaa", 0);
@@ -14,34 +27,6 @@ public class LinkList<T> {
 
         System.out.println(linkList.get(2));
         System.out.println(linkList.locate("dddd"));
-    }
-
-    private class Node {
-        private T data;
-        private Node next;
-
-        public Node() {
-        }
-
-        public Node(T data, Node next) {
-            this.data = data;
-            this.next = next;
-        }
-    }
-
-    private Node header;
-    private Node tail;
-    private int size;
-
-    public LinkList() {
-        header = null;
-        tail = null;
-    }
-
-    public LinkList(T element) {
-        header = new Node(element, null);
-        tail = header;
-        size++;
     }
 
     public int length() {
@@ -97,6 +82,7 @@ public class LinkList<T> {
 
     /**
      * 头插法为链表添加新节点
+     *
      * @param element
      */
     private void addAtHeader(T element) {
@@ -109,6 +95,7 @@ public class LinkList<T> {
 
     /**
      * 尾插法为链表添加新节点
+     *
      * @param element
      */
     public void addAtTail(T element) {
@@ -162,6 +149,19 @@ public class LinkList<T> {
             }
             int length = sb.length();
             return sb.delete(length - 2, length).append("]").toString();
+        }
+    }
+
+    private class Node {
+        private T data;
+        private Node next;
+
+        public Node() {
+        }
+
+        public Node(T data, Node next) {
+            this.data = data;
+            this.next = next;
         }
     }
 }

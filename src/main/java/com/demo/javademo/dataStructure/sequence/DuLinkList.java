@@ -7,6 +7,7 @@ public class DuLinkList<T> {
     private Node tail;
     //保存该链表中已包含的节点数
     private int size;
+
     //创建空链表
     public DuLinkList() {
         //空链表，header和tail都是null
