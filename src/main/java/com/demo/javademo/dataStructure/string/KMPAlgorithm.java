@@ -3,7 +3,7 @@ package com.demo.javademo.dataStructure.string;
 public class KMPAlgorithm {
     public static void main(String[] args) {
         System.out.println(kmpMatch("abaabaabbabaaabaabbabaab", "abaabbabaab"));
-//        int[] arr = getNext("abaabbabaab".toCharArray());
+//        int[] arr = getNext("abaabcac".toCharArray());
 //        System.out.println(java.util.Arrays.toString(arr));
     }
 
@@ -13,35 +13,35 @@ public class KMPAlgorithm {
         next[0] = -1;
         next[1] = 0;
         int k;
-        for (int j = 2; j < t.length; j++) {
-            k = next[j - 1];
+        for (int i = 2; i < t.length; i++) {
+            k = next[i - 1];
             while (k != -1) {
-                if (t[j - 1] == t[k]) {
-                    next[j] = k + 1;
+                if (t[i - 1] == t[k]) {
+                    next[i] = k + 1;
                     break;
                 } else {
                     k = next[k];
+                    next[i] = 0;
                 }
-                //当k==-1而跳出循环时，next[j] = 0，否则next[j]会在break之前被赋值
-                next[j] = 0;
             }
         }
         return next;
     }
 
+    // i不回退
     public static int kmpMatch(String s, String t) {
-        char[] s_arr = s.toCharArray();
-        char[] t_arr = t.toCharArray();
-        int[] next = getNext(t_arr);
+        char[] sArray = s.toCharArray();
+        char[] tArray = t.toCharArray();
+        int[] next = getNext(tArray);
         int i = 0, j = 0;
-        while (i < s_arr.length && j < t_arr.length) {
-            if (j == -1 || s_arr[i] == t_arr[j]) {
+        while (i < sArray.length && j < tArray.length) {
+            if (j == -1 || (sArray[i] == tArray[j])) {
                 i++;
                 j++;
             } else {
                 j = next[j];
             }
         }
-        return (j == t_arr.length) ? (i - j) : -1;
+        return (j == tArray.length) ? (i - j) : -1;
     }
 }
