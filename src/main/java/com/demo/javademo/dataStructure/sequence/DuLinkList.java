@@ -1,6 +1,34 @@
 package com.demo.javademo.dataStructure.sequence;
 
 public class DuLinkList<T> {
+
+    public static void main(String[] args) {
+        DuLinkList<String> list = new DuLinkList<>();
+        list.insertAtPosition("aaaa", 0);
+        list.addAtTail("bbbb");
+        list.insertAtPosition("cccc", 0);
+        //在索引为1处插入一个新元素
+        list.insertAtPosition("dddd", 1);
+        //输出顺序线性表的元素
+        System.out.println(list);
+
+        //删除索引为处的元素
+        list.delete(2);
+        System.out.println(list);
+
+        System.out.println(list.reverseToString());
+        //获取cccc字符串在顺序线性表中的位置
+        System.out.println("cccc在顺序线性表中的位置：" + list.locate("cccc"));
+
+        System.out.println("链表中索引1处的元素：" + list.get(1));
+
+        list.remove();
+        System.out.println("调用remove方法后的链表:" + list);
+
+        list.delete(0);
+        System.out.println("调用delete(0)后的链表:" + list);
+    }
+
     //保存该链表的头节点
     private Node header;
     //保存该链表的尾节点
@@ -23,30 +51,6 @@ public class DuLinkList<T> {
         size++;
     }
 
-    public static void main(String[] args) {
-        DuLinkList<String> list = new DuLinkList<>();
-        list.insertAtPosition("aaaa", 0);
-        list.addAtTail("bbbb");
-        list.insertAtPosition("cccc", 0);
-        //在索引为1处插入一个新元素
-        list.insertAtPosition("dddd", 1);
-        //输出顺序线性表的元素
-        System.out.println(list);
-        //删除索引为处的元素
-        list.delete(2);
-        System.out.println(list);
-        System.out.println(list.reverseToString());
-        //获取cccc字符串在顺序线性表中的位置
-        System.out.println("cccc在顺序线性表中的位置："
-                + list.locate("cccc"));
-        System.out.println("链表中索引1处的元素："
-                + list.get(1));
-        list.remove();
-        System.out.println("调用remove方法后的链表:" + list);
-        list.delete(0);
-        System.out.println("调用delete(0)后的链表:" + list);
-    }
-
     //返回链表的长度
     public int length() {
         return size;
@@ -54,19 +58,19 @@ public class DuLinkList<T> {
 
     //获取链式线性表中索引为index处的元素
     public T get(int index) {
-        return getNodeByIndex(index).data;
+        Node indeNode = getNodeByIndex(index);
+        return (indeNode == null) ? null : indeNode.data;
     }
 
     //根据索引index获取指定位置的节点
     private Node getNodeByIndex(int index) {
         if (index < 0 || index > size - 1) {
-            throw new IndexOutOfBoundsException("线性表索引越界");
+            throw new IndexOutOfBoundsException("线性表getNodeByIndex索引越界");
         }
         if (index <= size / 2) {
             //从header节点开始
             Node current = header;
-            for (int i = 0; i <= size / 2 && current != null
-                    ; i++, current = current.next) {
+            for (int i = 0; i <= size / 2 && current != null; i++, current = current.next) {
                 if (i == index) {
                     return current;
                 }
@@ -74,8 +78,7 @@ public class DuLinkList<T> {
         } else {
             //从tail节点开始搜索
             Node current = tail;
-            for (int i = size - 1; i > size / 2 && current != null
-                    ; i++, current = current.prev) {
+            for (int i = size - 1; i > size / 2 && current != null; i++, current = current.prev) {
                 if (i == index) {
                     return current;
                 }
@@ -88,8 +91,7 @@ public class DuLinkList<T> {
     public int locate(T element) {
         //从头节点开始搜索
         Node current = header;
-        for (int i = 0; i < size && current != null
-                ; i++, current = current.next) {
+        for (int i = 0; i < size && current != null; i++, current = current.next) {
             if (current.data.equals(element)) {
                 return i;
             }
@@ -100,7 +102,7 @@ public class DuLinkList<T> {
     //向线性链式表的指定位置插入一个元素。
     public void insertAtPosition(T element, int index) {
         if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("线性表索引越界");
+            throw new IndexOutOfBoundsException("线性表insertAtPosition索引越界");
         }
         //如果还是空链表
         if (header == null) {
@@ -158,7 +160,7 @@ public class DuLinkList<T> {
     //删除链式线性表中指定索引处的元素
     public T delete(int index) {
         if (index < 0 || index > size - 1) {
-            throw new IndexOutOfBoundsException("线性表索引越界");
+            throw new IndexOutOfBoundsException("线性表delete索引越界");
         }
         Node del = null;
         //如果被删除的是header节点
@@ -210,9 +212,8 @@ public class DuLinkList<T> {
             return "[]";
         } else {
             StringBuilder sb = new StringBuilder("[");
-            for (Node current = header; current != null
-                    ; current = current.next) {
-                sb.append(current.data.toString() + ", ");
+            for (Node current = header; current != null; current = current.next) {
+                sb.append(current.data.toString()).append(", ");
             }
             int len = sb.length();
             return sb.delete(len - 2, len).append("]").toString();
@@ -225,9 +226,8 @@ public class DuLinkList<T> {
             return "[]";
         } else {
             StringBuilder sb = new StringBuilder("[");
-            for (Node current = tail; current != null
-                    ; current = current.prev) {
-                sb.append(current.data.toString() + ", ");
+            for (Node current = tail; current != null; current = current.prev) {
+                sb.append(current.data.toString()).append(", ");
             }
             int len = sb.length();
             return sb.delete(len - 2, len).append("]").toString();
@@ -242,10 +242,6 @@ public class DuLinkList<T> {
         private Node prev;
         //指向下个节点的引用
         private Node next;
-
-        //无参数的构造器
-        public Node() {
-        }
 
         //初始化全部属性的构造器
         public Node(T data, Node prev, Node next) {

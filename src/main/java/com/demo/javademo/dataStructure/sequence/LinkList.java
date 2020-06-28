@@ -4,6 +4,7 @@ public class LinkList<T> {
     private Node header;
     private Node tail;
     private int size;
+
     public LinkList() {
         header = null;
         tail = null;
@@ -15,7 +16,7 @@ public class LinkList<T> {
     }
 
     public static void main(String[] args) {
-        LinkList<String> linkList = new LinkList<String>();
+        LinkList<String> linkList = new LinkList<>();
         linkList.insert("aaaa", 0);
         linkList.addAtTail("bbbb");
         linkList.addAtTail("cccc");
@@ -82,8 +83,6 @@ public class LinkList<T> {
 
     /**
      * 头插法为链表添加新节点
-     *
-     * @param element
      */
     private void addAtHeader(T element) {
         header = new Node(element, header);
@@ -95,8 +94,6 @@ public class LinkList<T> {
 
     /**
      * 尾插法为链表添加新节点
-     *
-     * @param element
      */
     public void addAtTail(T element) {
         // 空链表
@@ -115,7 +112,7 @@ public class LinkList<T> {
         if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException("线性表delete索引越界");
         }
-        Node delNode = null;
+        Node delNode;
         // 删除头结点
         if (index == 0) {
             delNode = header;
@@ -155,9 +152,6 @@ public class LinkList<T> {
     private class Node {
         private T data;
         private Node next;
-
-        public Node() {
-        }
 
         public Node(T data, Node next) {
             this.data = data;

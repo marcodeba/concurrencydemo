@@ -7,17 +7,17 @@ import java.util.Arrays;
  * Fibonacci Search 斐波那契查找，利用黄金分割原理实现
  *  
  * 算法复杂度 O(logn)
- *
+ * <p>
  * 二分查找分割方式 middle = (low+high)/2  加法和除法
  * 插值查找分割方式 middle = low + (high-low)*(key-a[low])/(a[high]-a[low]) 加减乘除都用上了
  * 斐波那契查找分割方式 middle = low + Fibonacci[index - 1] - 1
- *
+ * <p>
  * Fibonacci Search examines relatively closer elements in subsequent steps.
  * So when input array is big that cannot fit in CPU cache or even in RAM, Fibonacci Search can be useful.
  */
 public class FibonacciSearch {
     public static void main(String[] args) {
-        int[] a = new int[]{ 1, 5, 15, 22, 25, 31, 39, 42, 47, 49, 59, 68, 88, 88};
+        int[] a = new int[]{1, 5, 15, 22, 25, 31, 39, 42, 47, 49, 59, 68, 88, 88};
         System.out.println("待查找数组 a：" + Arrays.toString(a));
         System.out.println("待查找数组长度为：" + a.length);
         int key = 59;
@@ -31,7 +31,7 @@ public class FibonacciSearch {
         //斐波那契数列中的角标值 
         int index = 0;
         //用于展示斐波那契数列 
-        ArrayList<Integer> fibonacciArray = new ArrayList();
+        ArrayList<Integer> fibonacciArray = new ArrayList<>();
         //计算length位于斐波那契数列的位置 
         while (a.length > fibo) {
             fibo = getFibonacci(index);
@@ -47,9 +47,7 @@ public class FibonacciSearch {
 
         //定义临时数组来扩展待查数组的长度，长度为 fibo 
         int[] temp = new int[fibo - 1];
-        for (int i = 0; i < a.length; i++) {
-            temp[i] = a[i];
-        }
+        System.arraycopy(a, 0, temp, 0, a.length);
 
         for (int i = a.length; i < temp.length; i++) {
             temp[i] = a[a.length - 1];
