@@ -7,11 +7,6 @@ import java.util.Arrays;
  * Fibonacci Search 斐波那契查找，利用黄金分割原理实现
  *  
  * 算法复杂度 O(logn)
- * <p>
- * 二分查找分割方式 middle = (low+high)/2  加法和除法
- * 插值查找分割方式 middle = low + (high-low)*(key-a[low])/(a[high]-a[low]) 加减乘除都用上了
- * 斐波那契查找分割方式 middle = low + Fibonacci[index - 1] - 1
- * <p>
  * Fibonacci Search examines relatively closer elements in subsequent steps.
  * So when input array is big that cannot fit in CPU cache or even in RAM, Fibonacci Search can be useful.
  */
@@ -20,9 +15,7 @@ public class FibonacciSearch {
         int[] a = new int[]{1, 5, 15, 22, 25, 31, 39, 42, 47, 49, 59, 68, 88, 88};
         System.out.println("待查找数组 a：" + Arrays.toString(a));
         System.out.println("待查找数组长度为：" + a.length);
-        int key = 59;
-        System.out.println("寻找的key为：" + key);
-        System.out.println("结果在数组 a 角标的 [" + fibonacciSearch(key, a) + "] 位");
+        System.out.println("结果在数组 a 角标的 [" + fibonacciSearch(59, a) + "] 位");
     }
 
     public static int fibonacciSearch(int key, int[] a) {
@@ -34,13 +27,12 @@ public class FibonacciSearch {
         ArrayList<Integer> fibonacciArray = new ArrayList<>();
         //计算length位于斐波那契数列的位置 
         while (a.length > fibo) {
-            fibo = getFibonacci(index);
+            fibo = getFibonacci(index++);
             fibonacciArray.add(fibo);
-            index++;
+            if (a.length <= fibo) {
+                index--;
+            }
         }
-        //要找到在斐波那契数列中大于待查数组长度值的最小值的角标，或者等于待查数组长度值的角标
-        index -= 1;
-
         //用于展示 
         System.out.println("斐波那契数列为：" + fibonacciArray.toString());
         System.out.println();
@@ -87,15 +79,16 @@ public class FibonacciSearch {
     }
 
     //生成斐波那契数
-    public static int getFibonacci(int k) {
-        if (k == 0) {
+    public static int getFibonacci(int n) {
+        if (n < 1) {
             return 0;
-        } else if (k == 1) {
-            return 1;
-        } else if (k > 1) {
-            return getFibonacci(k - 1) + getFibonacci(k - 2);
-        } else {
-            return -1;
         }
+        int[] fibonacciArray = new int[n + 1];
+        fibonacciArray[0] = 0;
+        fibonacciArray[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            fibonacciArray[i] = fibonacciArray[i - 1] + fibonacciArray[i - 2];
+        }
+        return fibonacciArray[n];
     }
 }
