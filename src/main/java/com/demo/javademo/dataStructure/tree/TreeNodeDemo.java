@@ -9,7 +9,7 @@ public class TreeNodeDemo {
         TreeNode treeNode = createBinaryTree(linkedList);
         //preOrderTravel(treeNode);
         //midOrderTravel(treeNode);
-        postTreavel(treeNode);
+        postTravel(treeNode);
     }
 
     public static TreeNode createBinaryTree(LinkedList<Integer> linkedList) {
@@ -67,9 +67,9 @@ public class TreeNodeDemo {
         }
     }
 
-    public static void postTreavel(TreeNode treeNode) {
+    public static void postTravel(TreeNode treeNode) {
         Stack<TreeNode> stack = new Stack<>();
-        Map<Integer,Integer > map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         while (treeNode != null || !stack.isEmpty()) {
             if (treeNode != null) {
                 stack.push(treeNode);

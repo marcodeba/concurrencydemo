@@ -2,6 +2,28 @@ package com.demo.javademo.dataStructure.sequence;
 
 public class DuLinkList<T> {
 
+    //保存该链表的头节点
+    private Node header;
+    //保存该链表的尾节点
+    private Node tail;
+    //保存该链表中已包含的节点数
+    private int size;
+
+    //创建空链表
+    public DuLinkList() {
+        //空链表，header和tail都是null
+        header = null;
+        tail = null;
+    }
+
+    //以指定数据元素来创建链表，该链表只有一个元素
+    public DuLinkList(T element) {
+        header = new Node(element, null, null);
+        //只有一个节点，header、tail都指向该节点
+        tail = header;
+        size++;
+    }
+
     public static void main(String[] args) {
         DuLinkList<String> list = new DuLinkList<>();
         list.insertAtPosition("aaaa", 0);
@@ -27,28 +49,6 @@ public class DuLinkList<T> {
 
         list.delete(0);
         System.out.println("调用delete(0)后的链表:" + list);
-    }
-
-    //保存该链表的头节点
-    private Node header;
-    //保存该链表的尾节点
-    private Node tail;
-    //保存该链表中已包含的节点数
-    private int size;
-
-    //创建空链表
-    public DuLinkList() {
-        //空链表，header和tail都是null
-        header = null;
-        tail = null;
-    }
-
-    //以指定数据元素来创建链表，该链表只有一个元素
-    public DuLinkList(T element) {
-        header = new Node(element, null, null);
-        //只有一个节点，header、tail都指向该节点
-        tail = header;
-        size++;
     }
 
     //返回链表的长度

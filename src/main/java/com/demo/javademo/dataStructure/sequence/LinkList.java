@@ -9,6 +9,7 @@ public class LinkList<T> {
         header = null;
         tail = null;
     }
+
     public LinkList(T element) {
         header = new Node(element, null);
         tail = header;
