@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class BubbleSort {
     /**
      * Version 0.1
+     *
      * @param array
      */
     public static void sortV1(int[] array) {
@@ -22,6 +23,7 @@ public class BubbleSort {
 
     /**
      * Version 2.0
+     *
      * @param array
      */
     public static void sortV2(int[] array) {
@@ -36,12 +38,13 @@ public class BubbleSort {
                     isSorted = false;
                 }
             }
-            if (isSorted) break;;
+            if (isSorted) break;
         }
     }
 
     /**
      * Version 3.0
+     *
      * @param array
      */
     public static void sortV3(int[] array) {
