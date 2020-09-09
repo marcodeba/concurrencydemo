@@ -8,8 +8,9 @@ import java.util.Scanner;
 public class MeetingArrangement {
     public static void main(String[] args) {
         Meeting[] meetings = initMeetings();
+        // 对会议进行排序，按照会议结束时间升序，如果会议结束时间一样，则按照会议开始时间降序
         Arrays.sort(meetings);
-
+        // 记录参加的会议
         List<Meeting> attendMeetings = new ArrayList<>(meetings.length);
         // 用于记录上次会议结束时间，下场会议开始时间必须晚于 lastEnd
         int lastEnd = 0;
@@ -29,9 +30,9 @@ public class MeetingArrangement {
     public static Meeting[] initMeetings() {
         System.out.print("请输入会议总数：");
         Scanner input = new Scanner(System.in);
-        int totalMeeting = input.nextInt();
-        Meeting[] meetings = new Meeting[totalMeeting];
-        for (int i = 0; i < totalMeeting; i++) {
+        int totalMeetings = input.nextInt();
+        Meeting[] meetings = new Meeting[totalMeetings];
+        for (int i = 0; i < totalMeetings; i++) {
             System.out.println("请输入" + (i + 1) + "会议开始时间");
             int begin = input.nextInt();
             System.out.println("请输入" + (i + 1) + "会议结束时间");
