@@ -15,16 +15,16 @@ public class SingletonExample7 {
     }
 
     public static SingletonExample7 getInstance() {
-        return Singleton.INSTANCE.getInstance();
+        return SingletonEnum.INSTANCE.getInstance();
     }
 
-    private enum Singleton {
+    private enum SingletonEnum {
         INSTANCE;
 
         private SingletonExample7 singleton;
 
         // JVM保证这个方法绝对只调用一次
-        Singleton() {
+        SingletonEnum() {
             singleton = new SingletonExample7();
         }
 
