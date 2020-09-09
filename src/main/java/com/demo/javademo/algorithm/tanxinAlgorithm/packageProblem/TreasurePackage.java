@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * 阿里巴巴与四十大盗背包问题
+ * 阿里巴巴与四十大盗背包问题（物品可分割）
+ * 使用贪心算法，每次从剩余宝物中选取单位重量价值最高的宝物（相同重量下价值最大的宝物）
  */
 public class TreasurePackage {
     public static void main(String[] args) {
@@ -13,8 +14,12 @@ public class TreasurePackage {
         // 背包最大容量
         double maxCapacity = input.nextDouble();
         // 每件宝物重量，价值和单位重量价值
-        Treasure[] treasures = initializData();
-        // 根据单位重量价值做排序
+        Treasure[] treasures = initTreasure();
+        /**
+         * 根据单位重量价值做排序
+         * 算法主要耗时在排序上，Arrays.sort()对基本类型数组采用快速排序，对对象类型数组采用归并排序，所以时间复杂度是O(nlogn)
+         * 空间复杂度是存储宝物的单位重量价值，所以空间复杂度是O(n)
+         */
         Arrays.sort(treasures);
 
         // 装入宝箱的宝物的价值
@@ -33,7 +38,7 @@ public class TreasurePackage {
         System.out.println("装入宝箱的宝物最大总价值是:" + sumValue);
     }
 
-    private static Treasure[] initializData() {
+    private static Treasure[] initTreasure() {
         Scanner input = new Scanner(System.in);
         System.out.print("请输入宝物数量：");
         int treasureCount = input.nextInt();
@@ -61,6 +66,12 @@ class Treasure implements Comparable<Treasure> {
     // 单位重量价值
     private double unitValue;
 
+    public Treasure(double weight, double value) {
+        this.value = value;
+        this.weight = weight;
+        unitValue = this.value / this.weight;
+    }
+
     public double getValue() {
         return value;
     }
@@ -71,12 +82,6 @@ class Treasure implements Comparable<Treasure> {
 
     public double getUnitValue() {
         return this.value / this.weight;
-    }
-
-    public Treasure(double weight, double value) {
-        this.value = value;
-        this.weight = weight;
-        unitValue = this.value / this.weight;
     }
 
     @Override
