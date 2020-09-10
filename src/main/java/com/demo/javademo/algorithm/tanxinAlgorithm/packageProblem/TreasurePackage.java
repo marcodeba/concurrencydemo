@@ -14,7 +14,7 @@ public class TreasurePackage {
         // 背包最大容量
         double maxCapacity = input.nextDouble();
         // 每件宝物重量，价值和单位重量价值
-        Treasure[] treasures = initTreasure();
+        Treasure[] treasures = initTreasures();
         /**
          * 根据单位重量价值做排序
          * 算法主要耗时在排序上，Arrays.sort()对基本类型数组采用快速排序，对对象类型数组采用归并排序，所以时间复杂度是O(nlogn)
@@ -38,7 +38,8 @@ public class TreasurePackage {
         System.out.println("装入宝箱的宝物最大总价值是:" + sumValue);
     }
 
-    private static Treasure[] initTreasure() {
+    // 初始化宝物数组
+    private static Treasure[] initTreasures() {
         Scanner input = new Scanner(System.in);
         System.out.print("请输入宝物数量：");
         int treasureCount = input.nextInt();
