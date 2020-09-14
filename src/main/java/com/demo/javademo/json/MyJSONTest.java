@@ -63,7 +63,7 @@ public class MyJSONTest {
             JSONObject data = (JSONObject) object.get("Data");
             JSONArray jsonArray = data.getJSONArray("ThemeList");
             result = JSON.parseArray(jsonArray.toJSONString(), TopTripType.class);
-            for (TopTripType trip: result) {
+            for (TopTripType trip : result) {
                 System.out.println(trip.getKey());
                 System.out.println(trip.getPoiId());
                 System.out.println(trip.getValue());

@@ -5,13 +5,15 @@ public class SmallPineapple {
     public int age;
     private double weight; // 体重只有自己知道
 
-    public SmallPineapple() {}
+    public SmallPineapple() {
+    }
 
     public SmallPineapple(String name, int age) {
         this.name = name;
         this.age = age;
     }
+
     public void getInfo() {
-        System.out.print("["+ name + " 的年龄是：" + age + "]");
+        System.out.print("[" + name + " 的年龄是：" + age + "]");
     }
 }
