@@ -36,26 +36,26 @@ public class QuickSort {
      * @param high
      */
     public static void quickSort(int[] array, int low, int high) {
-        Stack<Map<String, Integer>> quickSortStack = new Stack<>();
+        Stack<Map<String, Integer>> stack = new Stack<>();
         Map<String, Integer> rootParam = new HashMap<>();
         rootParam.put("low", low);
         rootParam.put("high", high);
-        quickSortStack.push(rootParam);
+        stack.push(rootParam);
 
-        while (!quickSortStack.isEmpty()) {
-            Map<String, Integer> param = quickSortStack.pop();
+        while (!stack.isEmpty()) {
+            Map<String, Integer> param = stack.pop();
             int pivotIndex = partition2(array, param.get("low"), param.get("high"));
             if (param.get("low") < pivotIndex - 1) {
                 Map<String, Integer> leftParam = new HashMap<>();
                 leftParam.put("low", param.get("low"));
                 leftParam.put("high", pivotIndex - 1);
-                quickSortStack.push(leftParam);
+                stack.push(leftParam);
             }
             if (param.get("high") > pivotIndex + 1) {
                 Map<String, Integer> rightParam = new HashMap<>();
                 rightParam.put("low", pivotIndex + 1);
                 rightParam.put("high", param.get("high"));
-                quickSortStack.push(rightParam);
+                stack.push(rightParam);
             }
         }
     }

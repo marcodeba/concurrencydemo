@@ -15,9 +15,12 @@ public class MergeSort {
     private static void sort(int[] arr, int low, int high) {
         if (low < high) {
             int mid = (low + high) / 2;
-            sort(arr, low, mid);//左边归并排序，使得左子序列有序
-            sort(arr, mid + 1, high);//右边归并排序，使得右子序列有序
-            merge(arr, low, mid, high);//将两个有序子数组合并操作
+            //左边归并排序，使得左子序列有序
+            sort(arr, low, mid);
+            //右边归并排序，使得右子序列有序
+            sort(arr, mid + 1, high);
+            //将两个有序子数组合并操作
+            merge(arr, low, mid, high);
         }
     }
 
