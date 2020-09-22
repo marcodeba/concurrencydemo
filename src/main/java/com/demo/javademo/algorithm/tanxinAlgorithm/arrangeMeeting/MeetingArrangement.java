@@ -33,9 +33,9 @@ public class MeetingArrangement {
         int totalMeetings = input.nextInt();
         Meeting[] meetings = new Meeting[totalMeetings];
         for (int i = 0; i < totalMeetings; i++) {
-            System.out.println("请输入" + (i + 1) + "会议开始时间");
+            System.out.println("请输入第" + (i + 1) + "个会议开始时间");
             int begin = input.nextInt();
-            System.out.println("请输入" + (i + 1) + "会议结束时间");
+            System.out.println("请输入第" + (i + 1) + "个会议结束时间");
             int end = input.nextInt();
             meetings[i] = new Meeting(i + 1, begin, end);
         }
