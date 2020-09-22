@@ -2,6 +2,9 @@ package com.demo.javademo.dataStructure.sort;
 
 import java.util.Arrays;
 
+/**
+ * 时间复杂度O(nlogn)
+ */
 public class MergeSort {
     public static void main(String[] args) {
         int[] arr = {4, 4, 6, 5, 3, 2, 8, 1};

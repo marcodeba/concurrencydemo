@@ -5,71 +5,84 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+/**
+ * 快速排序思想是基于分治策略，算法思想如下：
+ * 1. 分解：从数列中选出一个元素作为基准元素。以基准元素为基础，将问题分解为两个子序列，使小于等于基准元素的子序列在左侧，大于基准元素的子序列在右侧
+ * 2. 治理：对两个子序列进行快速排序
+ * 3. 合并：将排好序的两个子序列合并，得到原问题的解
+ */
 public class QuickSort {
     /**
      * 递归算法
      * @param array
-     * @param start
-     * @param end
+     * @param low
+     * @param high
      */
-//    public static void quickSort(int[] array, int start, int end) {
+//    public static void quickSort(int[] array, int low, int high) {
 //        if (array == null)
 //            throw new IllegalArgumentException("参数错误");
-//        if (start >= end) return;
+//        if (low >= high) return;
 //
-//        int pivotIndex = partition(array, start, end);
-//        quickSort(array, start, pivotIndex - 1);
-//        quickSort(array, pivotIndex + 1, end);
+//        int pivotIndex = partition(array, low, high);
+//        quickSort(array, low, pivotIndex - 1);
+//        quickSort(array, pivotIndex + 1, high);
 //    }
 
     /**
      * 非递归算法
      *
      * @param array
-     * @param start
-     * @param end
+     * @param low
+     * @param high
      */
-    public static void quickSort(int[] array, int start, int end) {
+    public static void quickSort(int[] array, int low, int high) {
         Stack<Map<String, Integer>> quickSortStack = new Stack<>();
         Map<String, Integer> rootParam = new HashMap<>();
-        rootParam.put("start", start);
-        rootParam.put("end", end);
+        rootParam.put("low", low);
+        rootParam.put("high", high);
         quickSortStack.push(rootParam);
 
         while (!quickSortStack.isEmpty()) {
             Map<String, Integer> param = quickSortStack.pop();
-            int pivotIndex = partition(array, param.get("start"), param.get("end"));
-            if (param.get("start") < pivotIndex - 1) {
+            int pivotIndex = partition(array, param.get("low"), param.get("high"));
+            if (param.get("low") < pivotIndex - 1) {
                 Map<String, Integer> leftParam = new HashMap<>();
-                leftParam.put("start", param.get("start"));
-                leftParam.put("end", pivotIndex - 1);
+                leftParam.put("low", param.get("low"));
+                leftParam.put("high", pivotIndex - 1);
                 quickSortStack.push(leftParam);
             }
-            if (param.get("end") > pivotIndex + 1) {
+            if (param.get("high") > pivotIndex + 1) {
                 Map<String, Integer> rightParam = new HashMap<>();
-                rightParam.put("start", pivotIndex + 1);
-                rightParam.put("end", param.get("end"));
+                rightParam.put("low", pivotIndex + 1);
+                rightParam.put("high", param.get("high"));
                 quickSortStack.push(rightParam);
             }
         }
     }
 
-    private static int partition(int[] array, int start, int end) {
-        int pivotValue = array[start];
-        // 小于基准元素的区域边界
-        int mark = start;
-        for (int i = start + 1; i <= end; i++) {
-            if (array[i] < pivotValue) {
-                mark++;
-                int temp = array[mark];
-                array[mark] = array[i];
-                array[i] = temp;
+    private static int partition(int[] array, int low, int high) {
+        int i = low, j = high, pivot = array[low];
+        while (i < j) {
+            // 从右往左扫描，找小于等于pivot的数，如果找到，array[i]和array[j]交换，i++
+            while (i < j && array[j] > pivot) {
+                j--;
+            }
+            if (i < j) {
+                int tmp = array[j];
+                array[j] = array[i];
+                array[i++] = tmp;
+            }
+            // 从左往右扫描，找到大于pivot的数，如果找到，array[i]和array[j]交换，j--
+            while (i < j && array[i] <= pivot) {
+                i++;
+            }
+            if (i < j) {
+                int tmp = array[j];
+                array[j--] = array[i];
+                array[i] = tmp;
             }
         }
-        array[start] = array[mark];
-        array[mark] = pivotValue;
-
-        return mark;
+        return i;
     }
 
     public static void main(String[] args) {
