@@ -1,5 +1,8 @@
 package com.demo.javademo.dataStructure.search;
 
+/**
+ * 时间复杂度O(logn)，空间复杂度O(1)
+ */
 public class BinarySearch {
     public static void main(String[] args) {
         int[] a = new int[]{0, 1, 16, 24, 35, 47, 59, 62, 73, 88, 99};

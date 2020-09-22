@@ -110,44 +110,44 @@ class HuffmanNode {
         this.value = value;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public void setParent(int parent) {
-        this.parent = parent;
-    }
-
-    public void setLchild(int lchild) {
-        this.lchild = lchild;
-    }
-
-    public void setRchild(int rchild) {
-        this.rchild = rchild;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
     public int getWeight() {
         return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     public int getParent() {
         return parent;
     }
 
+    public void setParent(int parent) {
+        this.parent = parent;
+    }
+
     public int getLchild() {
         return lchild;
+    }
+
+    public void setLchild(int lchild) {
+        this.lchild = lchild;
     }
 
     public int getRchild() {
         return rchild;
     }
 
+    public void setRchild(int rchild) {
+        this.rchild = rchild;
+    }
+
     public String getValue() {
         return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
