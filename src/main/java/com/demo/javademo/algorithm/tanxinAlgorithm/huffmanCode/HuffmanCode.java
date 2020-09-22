@@ -35,10 +35,10 @@ public class HuffmanCode {
         Scanner input = new Scanner(System.in);
         for (int i = 0; i < huffmanNodes.length; i++) {
             if (i < nodeCount) {
-                System.out.println("请输入第" + (i + 1) + "个结点权重");
-                int weight = input.nextInt();
                 System.out.println("请输入第" + (i + 1) + "个结点值");
                 String value = input.next();
+                System.out.println("请输入第" + (i + 1) + "个结点权重");
+                int weight = input.nextInt();
                 huffmanNodes[i] = new HuffmanNode(value, weight);
             } else {
                 huffmanNodes[i] = new HuffmanNode();

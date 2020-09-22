@@ -44,7 +44,7 @@ public class QuickSort {
 
         while (!quickSortStack.isEmpty()) {
             Map<String, Integer> param = quickSortStack.pop();
-            int pivotIndex = partition(array, param.get("low"), param.get("high"));
+            int pivotIndex = partition2(array, param.get("low"), param.get("high"));
             if (param.get("low") < pivotIndex - 1) {
                 Map<String, Integer> leftParam = new HashMap<>();
                 leftParam.put("low", param.get("low"));
@@ -68,20 +68,46 @@ public class QuickSort {
                 j--;
             }
             if (i < j) {
-                int tmp = array[j];
+                int temp = array[j];
                 array[j] = array[i];
-                array[i++] = tmp;
+                array[i++] = temp;
             }
             // 从左往右扫描，找到大于pivot的数，如果找到，array[i]和array[j]交换，j--
             while (i < j && array[i] <= pivot) {
                 i++;
             }
             if (i < j) {
-                int tmp = array[j];
+                int temp = array[j];
                 array[j--] = array[i];
-                array[i] = tmp;
+                array[i] = temp;
             }
         }
+        return i;
+    }
+
+    public static int partition2(int[] array, int low, int high) {
+        int i = low, j = high, pivot = array[low];
+        while (i < j) {
+            while (i < j && array[j] > pivot) j--;
+            while (i < j && array[i] <= pivot) i++;
+            if (i < j) {
+                // array[i]和array[j]互换
+                int temp = array[i];
+                array[i++] = array[j];
+                array[j--] = temp;
+            }
+        }
+        // i = j，如果array[i] > pivot，则array[i - 1] 与 pivot 互换
+        if (array[i] > pivot) {
+            int temp = array[i - 1];
+            array[i - 1] = array[low];
+            array[low] = temp;
+            return i - 1;
+        }
+        // 否则array[i] 与 pivot 互换
+        int temp = array[i];
+        array[i] = array[low];
+        array[low] = temp;
         return i;
     }
 
