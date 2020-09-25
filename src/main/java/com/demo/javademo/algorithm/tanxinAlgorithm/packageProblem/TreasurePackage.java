@@ -21,7 +21,6 @@ public class TreasurePackage {
          * 空间复杂度是存储宝物的单位重量价值，所以空间复杂度是O(n)
          */
         Arrays.sort(treasures);
-
         // 装入宝箱的宝物的价值
         double sumValue = 0.0;
         for (Treasure treasure : treasures) {
@@ -43,17 +42,15 @@ public class TreasurePackage {
         Scanner input = new Scanner(System.in);
         System.out.print("请输入宝物数量：");
         int treasureCount = input.nextInt();
-
         Treasure[] treasures = new Treasure[treasureCount];
         System.out.println("请输入每个宝物的重量和价值：");
-        for (int i = 0; i < treasureCount; i++) {
+        for (int i = 0; i < treasures.length; i++) {
             System.out.println("请第" + (i + 1) + "个宝物的重量");
             double weight = input.nextDouble();
             System.out.println("请第" + (i + 1) + "个宝物的价值");
             double value = input.nextDouble();
             treasures[i] = new Treasure(weight, value);
         }
-
         return treasures;
     }
 }
