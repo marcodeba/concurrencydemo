@@ -1,6 +1,5 @@
 package com.demo.javademo.concurrency.sychronizedTools;
 
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -17,35 +16,35 @@ public class SemaphoreTest {
         }
         executorService.shutdown();
     }
-}
 
-class Person implements Runnable {
-    private String name;
-    private Semaphore toilet;
+    static class Person implements Runnable {
+        private String name;
+        private Semaphore toilet;
 
-    public Person(String name, Semaphore toilet) {
-        this.name = name;
-        this.toilet = toilet;
-    }
+        public Person(String name, Semaphore toilet) {
+            this.name = name;
+            this.toilet = toilet;
+        }
 
-    @Override
-    public void run() {
-        try {
-            // 剩下的资源：即剩下的茅坑
-            if (toilet.availablePermits() > 0) {
-                System.out.println(name + "天助我也,终于有茅坑了...");
-            } else {
-                System.out.println(name + "怎么没有茅坑了...");
+        @Override
+        public void run() {
+            try {
+                // 剩下的资源：即剩下的茅坑
+                if (toilet.availablePermits() > 0) {
+                    System.out.println(name + "天助我也,终于有茅坑了...");
+                } else {
+                    System.out.println(name + "怎么没有茅坑了...");
+                }
+                //申请茅坑，如果资源达到3次就等待
+                toilet.acquire();
+                System.out.println(name + "终于轮我上厕所了..爽啊");
+                Thread.sleep(5000); // 模拟上厕所时间。
+                System.out.println(name + "厕所上完了...");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                toilet.release();
             }
-            //申请茅坑，如果资源达到3次就等待
-            toilet.acquire();
-            System.out.println(name + "终于轮我上厕所了..爽啊");
-            Thread.sleep(new Random().nextInt(1000)); // 模拟上厕所时间。
-            System.out.println(name + "厕所上完了...");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            toilet.release();
         }
     }
 }

@@ -8,7 +8,6 @@ public class CountDownLatchTest {
     public static void main(String[] args) {
         //Boss线程启动
         new BossThread().start();
-
         int count = Integer.parseInt(String.valueOf(countDownLatch.getCount()));
         for (int i = 0; i < count; i++) {
             new EmpleoyeeThread().start();
@@ -26,7 +25,6 @@ public class CountDownLatchTest {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             System.out.println("所有人都已经到齐了，开会吧...");
         }
     }
