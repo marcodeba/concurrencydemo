@@ -83,6 +83,7 @@ class Meeting implements Comparable<Meeting> {
         } else if (o.end < this.end) {
             return 1;
         } else {
+            // 会议结束时间相同，则按会议开始时间做降序排列
             return (o.start < this.start) ? 1 : 0;
         }
     }
