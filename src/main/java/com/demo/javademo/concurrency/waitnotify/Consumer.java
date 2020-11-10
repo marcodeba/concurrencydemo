@@ -21,6 +21,7 @@ public class Consumer implements Runnable {
                 //如果消息队列为空了，阻塞等待
                 while (msg.isEmpty()) {
                     try {
+                        // wait会立刻释放 synchronized 的锁，以便其他线程可以执行 notify
                         msg.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -29,7 +30,7 @@ public class Consumer implements Runnable {
                 try {
                     TimeUnit.SECONDS.sleep(1);
                     logger.info("消费者消费消息：" + msg.remove());
-                    //唤醒处于阻塞状态下的生产者
+                    // notify 必须要等到 notify 所在线程执行完 synchronized 块中的所有代码才会释放这把锁
                     msg.notify();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
