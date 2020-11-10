@@ -7,14 +7,19 @@ public class InterruptDemo {
 
     public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(() -> {
+            // 表示一个中断标记
             while (!Thread.currentThread().isInterrupted()) {
                 i++;
             }
             System.out.println(i);
-        }, "interruptDemo");
+        }, "interrupt Demo");
+        // 启动 thread 线程，此时一共有两个线程在跑，main线程和thread线程
         thread.start();
+
         TimeUnit.SECONDS.sleep(1);
-        thread.interrupt(); //设置interrupt标识为true
+
+        // 在main线程中，将 interrupt 标识设置为true
+        thread.interrupt();
         System.out.println(thread.isInterrupted());
     }
 
