@@ -1,4 +1,4 @@
-package com.demo.javademo.concurrency.waitnotify;
+package com.demo.javademo.concurrency.communication;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

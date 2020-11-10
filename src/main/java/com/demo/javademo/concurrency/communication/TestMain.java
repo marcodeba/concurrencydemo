@@ -1,4 +1,4 @@
-package com.demo.javademo.concurrency.waitnotify;
+package com.demo.javademo.concurrency.communication;
 
 import java.util.LinkedList;
 import java.util.Queue;

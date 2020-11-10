@@ -1,4 +1,4 @@
-package com.demo.javademo.concurrency.waitnotify;
+package com.demo.javademo.concurrency.communication;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
