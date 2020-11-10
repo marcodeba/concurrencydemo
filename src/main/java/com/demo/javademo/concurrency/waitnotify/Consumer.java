@@ -1,35 +1,39 @@
 package com.demo.javademo.concurrency.waitnotify;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 public class Consumer implements Runnable {
+    Logger logger = LoggerFactory.getLogger(Consumer.class);
     private Queue<String> msg;
-    private int maxSize;
 
-    public Consumer(Queue<String> msg, int maxSize) {
+    public Consumer(Queue<String> msg) {
         this.msg = msg;
-        this.maxSize = maxSize;
     }
 
     @Override
     public void run() {
         while (true) {
             synchronized (msg) {
+                //如果消息队列为空了，阻塞等待
                 while (msg.isEmpty()) {
-                    //如果消息队列为空了
                     try {
-                        msg.wait(); //阻塞当前线程
+                        msg.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
                 try {
-                    Thread.sleep(1000);
+                    TimeUnit.SECONDS.sleep(1);
+                    logger.info("消费者消费消息：" + msg.remove());
+                    //唤醒处于阻塞状态下的生产者
+                    msg.notify();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("消费者消费消息：" + msg.remove());
-                msg.notify(); //唤醒处于阻塞状态下的生产者
             }
         }
     }

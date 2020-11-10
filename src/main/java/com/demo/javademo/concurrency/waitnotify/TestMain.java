@@ -9,7 +9,7 @@ public class TestMain {
         Queue<String> queue = new LinkedList<>();
         int maxSize = 5;
         Producer producer = new Producer(queue, maxSize);
-        Consumer consumer = new Consumer(queue, maxSize);
+        Consumer consumer = new Consumer(queue);
         Thread t1 = new Thread(producer);
         Thread t2 = new Thread(consumer);
         t1.start();

@@ -1,8 +1,15 @@
 package com.demo.javademo.concurrency.waitnotify;
 
-import java.util.Queue;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.Queue;
+import java.util.concurrent.TimeUnit;
+
+@Slf4j
 public class Producer implements Runnable {
+    Logger logger = LoggerFactory.getLogger(Producer.class);
     private Queue<String> msg;
     private int maxSize;
 
@@ -13,10 +20,11 @@ public class Producer implements Runnable {
 
     @Override
     public void run() {
-        int i = 0;
+        int messageId = 0;
         while (true) {
-            i++;
+            messageId++;
             synchronized (msg) {
+                // 队列满了，阻塞等待
                 while (msg.size() == maxSize) {
                     try {
                         msg.wait();
@@ -25,13 +33,14 @@ public class Producer implements Runnable {
                     }
                 }
                 try {
-                    Thread.sleep(2000);
+                    TimeUnit.SECONDS.sleep(1);
+                    logger.info("生产者生产消息:" + messageId);
+                    msg.add("消息" + messageId);
+                    //唤醒处于阻塞状态下的线程
+                    msg.notify();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("生产者生产消息:" + i);
-                msg.add("生产消息：" + i);
-                msg.notify(); //唤醒处于阻塞状态下的线程
             }
         }
     }

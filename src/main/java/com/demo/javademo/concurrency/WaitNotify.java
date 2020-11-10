@@ -5,13 +5,15 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class WaitNotify {
-    static boolean flag = true;
+    static volatile boolean flag = true;
     static Object lock = new Object();
 
     public static void main(String[] args) throws Exception {
         Thread waitThread = new Thread(new Wait(), "WaitThread");
         waitThread.start();
+
         TimeUnit.SECONDS.sleep(1);
+
         Thread notifyThread = new Thread(new Notify(), "NotifyThread");
         notifyThread.start();
     }
