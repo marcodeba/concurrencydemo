@@ -15,7 +15,7 @@ public class ThreadStatusDemo {
                     e.printStackTrace();
                 }
             }
-        }, "timewaiting").start();
+        }, "time waiting").start();// 阻塞状态
 
         // 该线程在ThreadStatusDemo.class实例上等待
         // in Object.wait(), WAITING (on object monitor)
@@ -29,7 +29,7 @@ public class ThreadStatusDemo {
                     }
                 }
             }
-        }, "waiting").start();
+        }, "waiting").start();// 阻塞状态
 
         // 两个Blocked线程，一个获取锁，另一个被阻塞
         new Thread(new BlockDemo(), "BlockDemo-0").start();// waiting on condition, TIMED_WAITING (sleeping)

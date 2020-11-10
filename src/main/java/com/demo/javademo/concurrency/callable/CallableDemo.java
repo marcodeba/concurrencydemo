@@ -9,7 +9,10 @@ public class CallableDemo implements Callable<String> {
         CallableDemo callableDemo = new CallableDemo();
         FutureTask futureTask = new FutureTask(callableDemo);
         new Thread(futureTask).start();
+        System.out.println("main continue");
+        // 结果返回前会阻塞
         System.out.println(futureTask.get());
+        System.out.println("main finish");
     }
 
     @Override
