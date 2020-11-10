@@ -10,8 +10,8 @@ public class TestMain {
         int maxSize = 5;
         Producer producer = new Producer(queue, maxSize);
         Consumer consumer = new Consumer(queue);
-        Thread t1 = new Thread(producer);
-        Thread t2 = new Thread(consumer);
+        Thread t1 = new Thread(producer, "producer");
+        Thread t2 = new Thread(consumer, "consumer");
         t1.start();
         t2.start();
     }
