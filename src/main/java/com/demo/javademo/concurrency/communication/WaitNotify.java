@@ -1,4 +1,4 @@
-package com.demo.javademo.concurrency;
+package com.demo.javademo.concurrency.communication;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.demo.javademo.concurrency;
+package com.demo.javademo.concurrency.thread;
 
 /**
  * 线程复位：

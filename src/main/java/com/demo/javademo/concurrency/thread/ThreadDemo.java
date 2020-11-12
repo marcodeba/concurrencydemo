@@ -1,6 +1,12 @@
-package com.demo.javademo.concurrency;
+package com.demo.javademo.concurrency.thread;
 
 public class ThreadDemo extends Thread {
+    public static void main(String[] args) {
+        ThreadDemo demo = new ThreadDemo();
+        demo.start();
+        System.out.println("finish main");
+    }
+
     @Override
     public void run() {
         try {
@@ -10,11 +16,5 @@ public class ThreadDemo extends Thread {
         } finally {
             System.out.println("finish run");
         }
-    }
-
-    public static void main(String[] args) {
-        ThreadDemo demo = new ThreadDemo();
-        demo.start();
-        System.out.println("finish main");
     }
 }
