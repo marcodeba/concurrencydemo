@@ -1,6 +1,7 @@
 package com.demo.javademo.concurrency.condition;
 
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
@@ -24,9 +25,8 @@ public class ConditionConsumer implements Runnable {
                     System.out.println("消费者队列空了，请等待");
                     condition.await();
                 }
+                TimeUnit.SECONDS.sleep(1);
                 System.out.println("消费者消费消息:" + msg.remove());
-
-                Thread.sleep(1000);
                 condition.signal();
             } catch (Exception e) {
                 e.printStackTrace();

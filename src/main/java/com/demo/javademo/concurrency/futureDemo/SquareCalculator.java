@@ -1,4 +1,4 @@
-package com.demo.javademo.concurrency.FutureDemo;
+package com.demo.javademo.concurrency.futureDemo;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;

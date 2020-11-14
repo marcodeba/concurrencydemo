@@ -1,6 +1,7 @@
 package com.demo.javademo.concurrency.condition;
 
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
@@ -28,10 +29,9 @@ public class ConditionProducer implements Runnable {
                     System.out.println("生产者队列满了，请等待");
                     condition.await();
                 }
+                TimeUnit.SECONDS.sleep(1);
                 System.out.println("生产者生产消息:" + i);
                 msg.add("消息：" + i);
-
-                Thread.sleep(1000);
                 condition.signal();
             } catch (InterruptedException e) {
                 e.printStackTrace();

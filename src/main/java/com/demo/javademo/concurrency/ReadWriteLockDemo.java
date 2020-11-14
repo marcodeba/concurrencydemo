@@ -6,33 +6,38 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * 读读不互斥
+ * 读写互斥
+ * 写写互斥
+ */
 public class ReadWriteLockDemo {
     static Map<String, Object> cacheMap = new HashMap<>();
-    static ReadWriteLock lock = new ReentrantReadWriteLock();
-    static Lock readLock = lock.readLock();
-    static Lock writeLock = lock.writeLock();
+    static ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+    static Lock readLock = readWriteLock.readLock();
+    static Lock writeLock = readWriteLock.writeLock();
 
-    public static final Object get(String key) {
-        readLock.lock(); //读锁 ThreadA 阻塞
+    public static final Object read(String key) {
         try {
+            readLock.lock();
             return cacheMap.get(key);
         } finally {
-            readLock.unlock(); //释放读锁
+            readLock.unlock();
         }
     }
 
-    public static final Object write(String key, Object value) {
-        writeLock.lock(); //Other Thread 获得了写锁
+    public static final Object write(String key, Object object) {
         try {
-            return cacheMap.put(key, value);
+            writeLock.lock();
+            return cacheMap.put(key, object);
         } finally {
             writeLock.unlock();
         }
     }
 
     public static final void clear() {
-        writeLock.lock();
         try {
+            writeLock.lock();
             cacheMap.clear();
         } finally {
             writeLock.unlock();

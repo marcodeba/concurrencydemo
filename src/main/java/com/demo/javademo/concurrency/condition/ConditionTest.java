@@ -13,11 +13,9 @@ public class ConditionTest {
         Lock lock = new ReentrantLock();
         Condition condition = lock.newCondition();
 
-        ConditionProducer producer = new ConditionProducer(queue, maxSize, lock, condition);
-        ConditionConsumer consumer = new ConditionConsumer(queue, lock, condition);
-        Thread t1 = new Thread(producer);
-        Thread t2 = new Thread(consumer);
-        t1.start();
-        t2.start();
+        Thread producer = new Thread(new ConditionProducer(queue, maxSize, lock, condition));
+        Thread consumer = new Thread(new ConditionConsumer(queue, lock, condition));
+        producer.start();
+        consumer.start();
     }
 }

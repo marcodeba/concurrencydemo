@@ -1,10 +1,11 @@
 package com.demo.javademo.concurrency.condition;
 
 import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ConditionDemo {
-    static ReentrantLock lock = new ReentrantLock();
+    static Lock lock = new ReentrantLock();
 
     public static void main(String[] args) {
         Condition condition = lock.newCondition();
