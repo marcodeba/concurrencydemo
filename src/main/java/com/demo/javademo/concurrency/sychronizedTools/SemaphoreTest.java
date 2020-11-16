@@ -3,11 +3,13 @@ package com.demo.javademo.concurrency.sychronizedTools;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 public class SemaphoreTest {
     static ExecutorService executorService = Executors.newCachedThreadPool();
 
     public static void main(String[] args) {
+        // 令牌数
         Semaphore toilet = new Semaphore(3);
         for (int i = 1; i <= 10; i++) {
             Person person = new Person("第" + i + "个人,", toilet);
@@ -36,13 +38,16 @@ public class SemaphoreTest {
                     System.out.println(name + "怎么没有茅坑了...");
                 }
                 //申请茅坑，如果资源达到3次就等待
+                // 申请令牌，拿到令牌就可以往下跑
                 toilet.acquire();
                 System.out.println(name + "终于轮我上厕所了..爽啊");
-                Thread.sleep(5000); // 模拟上厕所时间。
+                // 模拟上厕所时间。
+                TimeUnit.SECONDS.sleep(3);
                 System.out.println(name + "厕所上完了...");
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
+                // 释放令牌
                 toilet.release();
             }
         }

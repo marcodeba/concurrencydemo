@@ -23,6 +23,7 @@ public class ConditionConsumer implements Runnable {
             try {
                 if (msg.isEmpty()) {
                     System.out.println("消费者队列空了，请等待");
+                    // 阻塞线程并释放锁
                     condition.await();
                 }
                 TimeUnit.SECONDS.sleep(1);

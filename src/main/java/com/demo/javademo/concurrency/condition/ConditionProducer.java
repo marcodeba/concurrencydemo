@@ -25,13 +25,16 @@ public class ConditionProducer implements Runnable {
             i++;
             lock.lock();
             try {
+                // 队列满了，生产者阻塞
                 if (msg.size() == maxSize) {
                     System.out.println("生产者队列满了，请等待");
+                    // 阻塞线程并释放锁
                     condition.await();
                 }
                 TimeUnit.SECONDS.sleep(1);
                 System.out.println("生产者生产消息:" + i);
                 msg.add("消息：" + i);
+                // 将线程从等待队列挪到AQS队列
                 condition.signal();
             } catch (InterruptedException e) {
                 e.printStackTrace();

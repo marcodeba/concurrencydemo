@@ -2,6 +2,9 @@ package com.demo.javademo.concurrency.sychronizedTools;
 
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * CountDownLatch 是共享锁
+ */
 public class CountDownLatchTest {
     private static CountDownLatch countDownLatch = new CountDownLatch(5);
 
@@ -10,7 +13,7 @@ public class CountDownLatchTest {
         new BossThread().start();
         int count = Integer.parseInt(String.valueOf(countDownLatch.getCount()));
         for (int i = 0; i < count; i++) {
-            new EmpleoyeeThread().start();
+            new EmployeeThread().start();
         }
     }
 
@@ -30,7 +33,7 @@ public class CountDownLatchTest {
     }
 
     //员工到达会议室
-    static class EmpleoyeeThread extends Thread {
+    static class EmployeeThread extends Thread {
         @Override
         public void run() {
             System.out.println(Thread.currentThread().getName() + "，到达会议室....");

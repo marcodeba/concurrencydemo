@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class BlockQueueDemo<E> {
     private int size;
-    private LinkedList<E> linkedList = new LinkedList<E>();
+    private LinkedList<E> linkedList = new LinkedList<>();
     private Lock lock = new ReentrantLock();
     Condition fullCondition = lock.newCondition();
     Condition emptyCondition = lock.newCondition();
@@ -19,6 +19,7 @@ public class BlockQueueDemo<E> {
 
     public static void main(String[] args) {
         BlockQueueDemo<Integer> blockQueue = new BlockQueueDemo<>(20);
+
         new Thread(() -> {
             for (int index = 0; index < 100; index++) {
                 blockQueue.enQueue(index);
