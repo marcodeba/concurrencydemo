@@ -1,4 +1,4 @@
-package com.demo.javademo.concurrency.thread;
+package com.demo.javademo.concurrency.interruptdemo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -24,12 +24,10 @@ public class ThreadInterruptDemo {
         //Thread testThread = new Thread(new ThreadInterruptDemo(), "InterruptionInJava");
         //start thread
         testThread.start();
-
         Thread.sleep(1000);
 
         ThreadInterruptDemo.on = true;
         testThread.interrupt();
-
         System.out.println("main end");
     }
 }

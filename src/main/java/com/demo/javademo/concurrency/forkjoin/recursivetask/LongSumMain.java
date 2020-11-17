@@ -30,7 +30,8 @@ public class LongSumMain {
         }
 
         // 3
-        System.out.println(IntStream.of(array).asLongStream().parallel().sum());
+        long sum = IntStream.of(array).asLongStream().parallel().sum();
+        System.out.println(sum);
     }
 
     static long seqSum(int[] array) {

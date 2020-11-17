@@ -1,4 +1,4 @@
-package com.demo.javademo.concurrency.thread;
+package com.demo.javademo.concurrency.interruptdemo;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +13,6 @@ public class InterruptDemo {
             }
             System.out.println(i);
         }, "interrupt Demo");
-        // 启动 thread 线程，此时一共有两个线程在跑，main线程和thread线程
         thread.start();
 
         TimeUnit.SECONDS.sleep(1);
