@@ -1,9 +1,9 @@
 package com.demo.javademo.io.serializer;
 
-public class TestJavaSerializer {
+public class TestHessianSerializer {
     public static void main(String[] args) {
         User user = new User("Serializer", 18);
-        ISerializer iSerializer = new JavaSerializer();
+        ISerializer iSerializer = new HessianSerializer();
         byte[] bytes = iSerializer.serialize(user);
         System.out.println(bytes.length);
 
