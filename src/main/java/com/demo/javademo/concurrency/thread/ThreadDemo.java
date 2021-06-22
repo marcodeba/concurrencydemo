@@ -4,7 +4,7 @@ public class ThreadDemo extends Thread {
     public static void main(String[] args) {
         ThreadDemo demo = new ThreadDemo();
         demo.start();
-        System.out.println("finish main");
+        System.out.println(Thread.currentThread().getName() + " finish main");
     }
 
     @Override
@@ -14,7 +14,7 @@ public class ThreadDemo extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            System.out.println("finish run");
+            System.out.println(Thread.currentThread().getName() + " finish run");
         }
     }
 }

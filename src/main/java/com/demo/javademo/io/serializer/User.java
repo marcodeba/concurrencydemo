@@ -9,6 +9,15 @@ public class User implements Serializable {
     private String name;
     private transient int age;
 
+    public User(String name) {
+        this.name = name;
+    }
+
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
     private void writeObject(ObjectOutputStream oos) throws IOException {
         oos.defaultWriteObject();
         oos.writeInt(age);
@@ -17,15 +26,6 @@ public class User implements Serializable {
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         ois.defaultReadObject();
         age = ois.readInt();
-    }
-
-    public User(String name) {
-        this.name = name;
-    }
-
-    public User(String name, int age) {
-        this.name = name;
-        this.age = age;
     }
 
     public int getAge() {

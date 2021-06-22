@@ -18,7 +18,7 @@ public class ReverseList {
     }
 
     public static Node reverseList(Node head) {
-        if (head == null) return head;
+        if (head == null) return null;
 
         Node previous = head;
         Node current = head.next;

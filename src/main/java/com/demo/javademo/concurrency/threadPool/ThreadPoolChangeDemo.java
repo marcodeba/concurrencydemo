@@ -41,8 +41,11 @@ public class ThreadPoolChangeDemo {
 //                System.out.println(Thread.currentThread().getName() + "当前线程完成任务");
             });
         }
+        // 5个最大线程都在工作，需要3批处理完15个耗时10秒的任务，一共需要30秒完成全部任务。
         threadPoolStatus(executor, "改变之前");
         TimeUnit.SECONDS.sleep(1);
+
+        // 把核心线程数和最大线程数都设置成10个，这样10个任务直接被10个最大线程数处理，10秒就会被处理完成，剩下的5个任务10秒后执行完成
         executor.setCorePoolSize(10);
         executor.setMaximumPoolSize(10);
         executor.prestartAllCoreThreads();

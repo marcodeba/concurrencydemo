@@ -10,11 +10,8 @@ public class ExcelReaderTest {
 
     public static void main(String[] args) throws Exception {
         ExcelReaderTest test = new ExcelReaderTest();
-        List<MyEntity> list = test.readSpu_tag();
-
-        for (MyEntity myEntity : list) {
-            System.out.println(myEntity);
-        }
+        List<MyEntity> entityList = test.readSpu_tag();
+        entityList.forEach(System.out::print);
     }
 
     public List<MyEntity> readSpu_tag() throws Exception {
