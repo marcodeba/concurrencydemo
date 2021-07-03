@@ -7,10 +7,10 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class BlockQueueDemo<E> {
     private int size;
-    private LinkedList<E> linkedList = new LinkedList<>();
+    private LinkedList<E> items = new LinkedList<>();
     private Lock lock = new ReentrantLock();
-    Condition fullCondition = lock.newCondition();
-    Condition emptyCondition = lock.newCondition();
+    Condition notFull = lock.newCondition();
+    Condition notEmpty = lock.newCondition();
 
     // 初始化BlockQueue
     public BlockQueueDemo(int size) {
@@ -46,15 +46,15 @@ public class BlockQueueDemo<E> {
         lock.lock();
         try {
             // 队列满了，入队阻塞
-            while (linkedList.size() == size) {
-                fullCondition.await();
+            while (items.size() == size) {
+                notFull.await();
             }
             // 否则将元素入队
-            linkedList.add(e);
+            items.add(e);
             System.out.println(e + "元素入队了");
 
             // 通知可以取元素了
-            emptyCondition.signal();
+            notEmpty.signal();
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         } finally {
@@ -72,15 +72,15 @@ public class BlockQueueDemo<E> {
         lock.lock();
         try {
             // 队列空，出队阻塞
-            while (linkedList.isEmpty()) {
-                emptyCondition.await();
+            while (items.isEmpty()) {
+                notEmpty.await();
             }
             // 否则将元素出队
-            element = linkedList.removeFirst();
+            element = items.removeFirst();
             System.out.println(element + "元素出列了");
 
             // 通知可以取元素了
-            fullCondition.signal();
+            notFull.signal();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
