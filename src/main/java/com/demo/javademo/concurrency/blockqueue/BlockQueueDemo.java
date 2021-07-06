@@ -6,15 +6,15 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class BlockQueueDemo<E> {
-    private int size;
+    private int count;
     private LinkedList<E> items = new LinkedList<>();
     private Lock lock = new ReentrantLock();
     Condition notFull = lock.newCondition();
     Condition notEmpty = lock.newCondition();
 
     // 初始化BlockQueue
-    public BlockQueueDemo(int size) {
-        this.size = size;
+    public BlockQueueDemo(int count) {
+        this.count = count;
     }
 
     public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class BlockQueueDemo<E> {
         lock.lock();
         try {
             // 队列满了，入队阻塞
-            while (items.size() == size) {
+            while (items.size() == count) {
                 notFull.await();
             }
             // 否则将元素入队

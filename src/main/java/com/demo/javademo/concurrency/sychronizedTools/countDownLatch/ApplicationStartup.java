@@ -5,11 +5,10 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 public class ApplicationStartup {
-    private static List<BaseHealthChecker> services;
+    private static List<BaseHealthChecker> services = new ArrayList<>();;
     private static CountDownLatch countDownLatch = new CountDownLatch(2);
 
     static {
-        services = new ArrayList<>();
         services.add(new CacheHealthChecker(countDownLatch));
         services.add(new DatabaseHealthChecker(countDownLatch));
     }
