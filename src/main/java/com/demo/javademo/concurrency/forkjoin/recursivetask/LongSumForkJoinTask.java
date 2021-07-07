@@ -37,9 +37,7 @@ class LongSumForkJoinTask extends RecursiveTask<Long> {
             // 将任务放入队列并异步执行，开启一个子任务
             left.fork();
             right.fork();
-            long rightAns = right.join();
-            long leftAns = left.join();
-            return leftAns + rightAns;
+            return left.join() + right.join();
         }
     }
 }
