@@ -18,6 +18,8 @@ public class LockSupportDemo {
             TimeUnit.SECONDS.sleep(1);
             System.out.println("准备唤醒线程" + thread1.getName());
             LockSupport.unpark(thread1);
+            TimeUnit.SECONDS.sleep(1);
+            thread1.interrupt();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

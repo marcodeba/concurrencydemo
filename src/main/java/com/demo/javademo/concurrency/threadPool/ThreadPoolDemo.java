@@ -1,20 +1,21 @@
 package com.demo.javademo.concurrency.threadPool;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ThreadPoolDemo {
     public static void main(String[] args) {
         // 一批批的跑
-        ExecutorService executorService1 = Executors.newFixedThreadPool(10);//慢
+//        ExecutorService executorService1 = Executors.newFixedThreadPool(10);//慢
         // 所有的一起跑
-        ExecutorService executorService2 = Executors.newCachedThreadPool();//快
+//        ExecutorService executorService2 = Executors.newCachedThreadPool();//快
         // 一个个地跑
         ExecutorService executorService3 = Executors.newSingleThreadExecutor();//最慢
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 20,
-                0L, TimeUnit.MILLISECONDS,
-                new ArrayBlockingQueue<>(10));
+//        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 20,
+//                0L, TimeUnit.MILLISECONDS,
+//                new ArrayBlockingQueue<>(10));
         for (int i = 0; i < 100; i++) {
-            threadPoolExecutor.execute(new MyTask(i));
+            executorService3.execute(new MyTask(i));
         }
     }
 
